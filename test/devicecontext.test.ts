@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import * as Path from "path";
 import * as util from "../src/common/util";
+import * as childProcess from "child_process";
 
 import { DeviceContext } from "../src/deviceContext";
 
@@ -8,6 +9,8 @@ suite("Arduino: Device Context config", () => {
 
     // tslint:disable-next-line: only-arrow-functions
     test("should be able to resolve arduino.json correctly", function(done) {
+        const permission = childProcess.execSync("ls -l /home/travis/build/Sneezry/vscode-arduino/.vscode-test/VSCode-linux-x64/resources/app/node_modules/vscode-ripgrep/bin/rg", { encoding: "utf8" });
+        console.log(permission)
         const deviceContext = DeviceContext.getInstance();
         try {
             deviceContext.loadContext().then(() => {
